@@ -23,7 +23,14 @@ export default function TheFellowshipOfTheRing() {
           );
         })}
       </ul>
-      <Image src={volume.cover} alt="cinema" width={140} height={230} />
+      <Image
+        src={volume.cover}
+        alt={`Cover of §{volume.title}`}
+        width={140}
+        height={230}
+      />
+      <br />
+      <br />
       <Link href="/volumes/the-two-towers">Next Volume</Link>
     </>
   );

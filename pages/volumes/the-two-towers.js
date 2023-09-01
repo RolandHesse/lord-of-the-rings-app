@@ -21,8 +21,17 @@ export default function TheTwoTowers() {
           );
         })}
       </ul>
-      <Image src={volume.cover} alt="cinema" width={140} height={230} />
-      <Link href="/volumes/the-fellowship-of-the-ring">Previous Volume</Link>
+      <Image
+        src={volume.cover}
+        alt={`Cover of §{volume.title}`}
+        width={140}
+        height={230}
+      />
+      <br />
+      <br />
+      <Link href="/volumes/the-fellowship-of-the-ring">
+        Previous Volume
+      </Link>{" "}
       <Link href="/volumes/the-return-of-the-king">Next Volume</Link>
     </>
   );
