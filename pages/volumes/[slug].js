@@ -12,16 +12,12 @@ export default function VolumeDetail() {
 
   const currentVolume = volumes.find((volume) => volume.slug === slug);
 
-  console.log("currentVolume: ", currentVolume);
-
   const currentIndex = volumes.findIndex(
     (volume) => volume.slug === currentVolume.slug
   );
 
   const nextIndexSlug = volumes[currentIndex + 1]?.slug;
   const previousIndexSlug = volumes[currentIndex - 1]?.slug;
-
-  console.log("currentIndex: ", currentIndex);
 
   return (
     <>
