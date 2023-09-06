@@ -4,6 +4,11 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import { uid } from "uid";
+import { styled } from "styled-components";
+
+const BooksAndCoverWrapper = styled.div`
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
+`;
 
 export default function VolumeDetail() {
   const router = useRouter();
@@ -27,22 +32,24 @@ export default function VolumeDetail() {
       <Link href="/volumes">⬅ All Volumes</Link>
       <h1>{currentVolume.title}</h1>
       <p>{currentVolume.description}</p>
-      <h3>Books:</h3>
-      <ul>
-        {currentVolume.books.map((book) => {
-          return (
-            <li key={uid()}>
-              {book.ordinal}: {book.title}
-            </li>
-          );
-        })}
-      </ul>
-      <Image
-        src={currentVolume.cover}
-        alt={`Cover of §{currentVolume.title}`}
-        width={140}
-        height={230}
-      />
+      {/* <h3>Books:</h3> */}
+      <BooksAndCoverWrapper $backgroundColor={currentVolume.color}>
+        <ul>
+          {currentVolume.books.map((book) => {
+            return (
+              <li key={uid()}>
+                {book.ordinal}: {book.title}
+              </li>
+            );
+          })}
+        </ul>
+        <Image
+          src={currentVolume.cover}
+          alt={`Cover of §{currentVolume.title}`}
+          width={140}
+          height={230}
+        />
+      </BooksAndCoverWrapper>
       <br />
       {previousIndexSlug && (
         <Link href={`/volumes/${previousIndexSlug}`}>Previous Volume</Link>

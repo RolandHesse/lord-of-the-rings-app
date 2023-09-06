@@ -2,6 +2,11 @@ import { introduction, volumes } from "../../lib/data";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import { styled } from "styled-components";
+
+const VolumeWrapper = styled.ul`
+  background-color: hotpink;
+`;
 
 export default function Overview() {
   const router = useRouter();
@@ -19,7 +24,7 @@ export default function Overview() {
       <h1>Lord of the Rings</h1>
       <p>{introduction}</p>
       <h2>All Volumes</h2>
-      <ul>
+      <VolumeWrapper>
         {volumes.map((volume) => {
           return (
             <li key={volume.slug}>
@@ -27,7 +32,7 @@ export default function Overview() {
             </li>
           );
         })}
-      </ul>
+      </VolumeWrapper>
       <button type="button" onClick={handleClick}>
         Show Random Volume
       </button>
