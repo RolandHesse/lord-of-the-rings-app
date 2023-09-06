@@ -6,8 +6,23 @@ import Head from "next/head";
 import { uid } from "uid";
 import { styled } from "styled-components";
 
+const PageWrapper = styled.div`
+  padding: 20px;
+`;
+
 const BooksAndCoverWrapper = styled.div`
   background-color: ${({ $backgroundColor }) => $backgroundColor};
+  color: var(--color-clouds);
+  display: flex;
+  justify-content: space-around;
+  gap: 50px;
+  padding: 20px;
+  margin: 0;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: var(--color-earth);
 `;
 
 export default function VolumeDetail() {
@@ -29,35 +44,41 @@ export default function VolumeDetail() {
       <Head>
         <title>{currentVolume.title}</title>
       </Head>
-      <Link href="/volumes">⬅ All Volumes</Link>
-      <h1>{currentVolume.title}</h1>
-      <p>{currentVolume.description}</p>
-      {/* <h3>Books:</h3> */}
-      <BooksAndCoverWrapper $backgroundColor={currentVolume.color}>
-        <ul>
-          {currentVolume.books.map((book) => {
-            return (
-              <li key={uid()}>
-                {book.ordinal}: {book.title}
-              </li>
-            );
-          })}
-        </ul>
-        <Image
-          src={currentVolume.cover}
-          alt={`Cover of §{currentVolume.title}`}
-          width={140}
-          height={230}
-        />
-      </BooksAndCoverWrapper>
-      <br />
-      {previousIndexSlug && (
-        <Link href={`/volumes/${previousIndexSlug}`}>Previous Volume</Link>
-      )}
-      <br />
-      {nextIndexSlug && (
-        <Link href={`/volumes/${nextIndexSlug}`}>Next Volume</Link>
-      )}
+      <PageWrapper>
+        <StyledLink href="/volumes">⬅ All Volumes</StyledLink>
+        <h1>{currentVolume.title}</h1>
+        <p>{currentVolume.description}</p>
+        {/* <h3>Books:</h3> */}
+        <BooksAndCoverWrapper $backgroundColor={currentVolume.color}>
+          <ul>
+            {currentVolume.books.map((book) => {
+              return (
+                <li key={uid()}>
+                  {book.ordinal}: {book.title}
+                </li>
+              );
+            })}
+          </ul>
+          <Image
+            src={currentVolume.cover}
+            alt={`Cover of §{currentVolume.title}`}
+            width={140}
+            height={230}
+          />
+        </BooksAndCoverWrapper>
+        <br />
+        {previousIndexSlug && (
+          <StyledLink href={`/volumes/${previousIndexSlug}`}>
+            Previous Volume
+          </StyledLink>
+        )}
+        <br />
+        {nextIndexSlug && (
+          <StyledLink href={`/volumes/${nextIndexSlug}`}>
+            Next Volume
+          </StyledLink>
+        )}
+      </PageWrapper>
     </>
   );
 }
