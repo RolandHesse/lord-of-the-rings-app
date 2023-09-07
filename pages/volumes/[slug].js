@@ -5,9 +5,10 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { uid } from "uid";
 import { styled } from "styled-components";
+import Chevron from "@/icons/chevron-left.svg";
 
 const PageWrapper = styled.div`
-  padding: 20px;
+  padding: 0px;
 `;
 
 const BooksAndCoverWrapper = styled.div`
@@ -27,14 +28,12 @@ const StyledLink = styled(Link)`
 
 export default function VolumeDetail() {
   const router = useRouter();
-  const { slug } = router.query;
-  console.log("slug: ", slug);
-
-  const currentVolume = volumes.find((volume) => volume.slug === slug);
+  const routerSlug = router.query.slug;
 
   const currentIndex = volumes.findIndex(
-    (volume) => volume.slug === currentVolume.slug
+    (volume) => volume.slug === routerSlug
   );
+  const currentVolume = volumes[currentIndex];
 
   const nextIndexSlug = volumes[currentIndex + 1]?.slug;
   const previousIndexSlug = volumes[currentIndex - 1]?.slug;
@@ -45,7 +44,9 @@ export default function VolumeDetail() {
         <title>{currentVolume.title}</title>
       </Head>
       <PageWrapper>
-        <StyledLink href="/volumes">⬅ All Volumes</StyledLink>
+        <StyledLink href="/volumes">
+          <Chevron /> All Volumes
+        </StyledLink>
         <h1>{currentVolume.title}</h1>
         <p>{currentVolume.description}</p>
         {/* <h3>Books:</h3> */}
