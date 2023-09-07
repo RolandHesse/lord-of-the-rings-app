@@ -6,9 +6,12 @@ import Head from "next/head";
 import { uid } from "uid";
 import { styled } from "styled-components";
 import Chevron from "@/icons/chevron-left.svg";
+import ArrowLeft from "@/icons/arrow-left.svg";
+import ArrowRight from "@/icons/arrow-right.svg";
 
 const PageWrapper = styled.div`
   padding: 0px;
+  font: var(--font-body);
 `;
 
 const BooksAndCoverWrapper = styled.div`
@@ -24,6 +27,17 @@ const BooksAndCoverWrapper = styled.div`
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: var(--color-earth);
+`;
+
+const BooksWrapper = styled.ul`
+  list-style: none;
+`;
+
+const ListEntry = styled.li``;
+
+const Nav = styled.nav`
+  display: flex;
+  flex-direction: column;
 `;
 
 export default function VolumeDetail() {
@@ -51,15 +65,17 @@ export default function VolumeDetail() {
         <p>{currentVolume.description}</p>
         {/* <h3>Books:</h3> */}
         <BooksAndCoverWrapper $backgroundColor={currentVolume.color}>
-          <ul>
+          <BooksWrapper>
             {currentVolume.books.map((book) => {
               return (
                 <li key={uid()}>
-                  {book.ordinal}: {book.title}
+                  {book.ordinal}
+                  <br />
+                  {book.title}
                 </li>
               );
             })}
-          </ul>
+          </BooksWrapper>
           <Image
             src={currentVolume.cover}
             alt={`Cover of §{currentVolume.title}`}
@@ -68,17 +84,28 @@ export default function VolumeDetail() {
           />
         </BooksAndCoverWrapper>
         <br />
-        {previousIndexSlug && (
-          <StyledLink href={`/volumes/${previousIndexSlug}`}>
-            Previous Volume
-          </StyledLink>
-        )}
-        <br />
-        {nextIndexSlug && (
-          <StyledLink href={`/volumes/${nextIndexSlug}`}>
-            Next Volume
-          </StyledLink>
-        )}
+        <Nav>
+          {previousIndexSlug && (
+            <div>
+              <ArrowLeft />
+              <StyledLink href={`/volumes/${previousIndexSlug}`}>
+                Previous Volume
+                {volumes[currentIndex - 1].title}
+                <br />
+              </StyledLink>
+            </div>
+          )}
+          <br />
+          {nextIndexSlug && (
+            <div>
+              <StyledLink href={`/volumes/${nextIndexSlug}`}>
+                Next Volume
+                {volumes[currentIndex + 1].title}
+              </StyledLink>
+              <ArrowRight />
+            </div>
+          )}
+        </Nav>
       </PageWrapper>
     </>
   );

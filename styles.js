@@ -15,7 +15,15 @@ export default createGlobalStyle`
 
   body {
     margin: 0;  
-    // font-family: system-ui;
+    font: var(--font-body);
+  }
+
+  h1 {
+    font: var(--font-headline-1);
+  }
+
+  h2 {
+    font: var(--font-headline-2)
   }
 
 
@@ -26,7 +34,7 @@ export default createGlobalStyle`
   --color-smoke: #d4d1cd;
 
   /* Font styles */
-  --font-family: ${lora.style.fontFamily} serif;
+  --font-family: ${lora.style.fontFamily}, serif;
   /*
     use like:
     font: var(--font-body);
